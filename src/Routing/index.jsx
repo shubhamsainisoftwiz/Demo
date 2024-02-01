@@ -9,7 +9,7 @@ import Errors from '../components/Errors'
 const Routing = () => {
   return (
     <Routes>
-        <Route path='/' element={  <One /> } />
+        <Route path='/Demo' element={  <One /> } />
         <Route path='/two' element={ <ProtectedRoutes Component={Two}  /> } />
         <Route path='*' element={<Errors /> } />
     </Routes>
