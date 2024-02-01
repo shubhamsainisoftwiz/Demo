@@ -1,10 +1,11 @@
 import './App.css';
-import Routing from './Routing';
+// import Routing from './Routing';
 
 function App() {
   return (
     <div className="App">
-      <Routing />
+      {/* <Routing /> */}
+      <p>hello</p>
     </div>
   );
 }
