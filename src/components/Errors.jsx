@@ -5,7 +5,7 @@ const Errors = () => {
     
 
   return (
-    <div>error</div>
+    <div>errors</div>
   )
 }
 
