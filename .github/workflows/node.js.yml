@@ -10,33 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.9.0'
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.9.0'
 
-      - name: Install Dependencies
-        run: npm install
+    - name: Install Dependencies
+      run: npm install
 
-      - name: Build React App
-        run: npm run build
+    - name: Build React App
+      run: npm run build
 
   deploy:
-    needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout gh-pages Branch
-        uses: actions/checkout@v2
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Deploy to gh-pages
-        working-directory: gh-pages
-        run: npm run deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+    - name: Deploy to GitHub Pages
+      uses: actions/checkout@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
