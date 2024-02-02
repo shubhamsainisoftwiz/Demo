@@ -34,21 +34,24 @@ jobs:
         with:
           ref: gh-pages  # Checkout the gh-pages branch explicitly
 
-      - name: Deploy to GitHub Pages (using latest stable action)
-        uses: peaceiris/actions-gh-pages@v3  # Alternative with potential advantages
+      - name: Deploy to GitHub Pages using peaceiris/actions-gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}  # Use dedicated token with repo permissions
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}  # Replace with personal access token with repo permissions
           PUBLISH_DIR: ./build  # Provide the directory containing built files
+          USER_NAME: 'GitHub Actions Bot'  # Optional: Set custom commit user name
+          USER_EMAIL: 'github-actions[bot]@users.noreply.github.com'  # Optional: Set custom commit email
+          SKIP_PUSH: false  # Optionally keep this to allow the action to push changes (if allowed)
 
-      # Optional commit and push to gh-pages (consider using the alternative action's built-in functionality)
-      - name: Push changes to gh-pages (optional)
-        run: |
-          git config --global user.name 'GitHub Actions Bot'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
-          git commit -m "Deploy from workflow run #${{ github.run_id }}"
-          git push origin gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
-        if: always()  # Optionally commit and push changes to track deployments
+      # Alternative approach (optional): Push changes manually if SKIP_PUSH is true
+      # - name: Push changes to gh-pages (optional)
+      #   run: |
+      #     git config --global user.name ${{ steps.deploy.outputs.GH_PAGES_USER_NAME }}
+      #     git config --global user.email ${{ steps.deploy.outputs.GH_PAGES_USER_EMAIL }}
+      #     git add .
+      #     git commit -m "Deploy from workflow run #${{ github.run_id }}"
+      #     git push origin gh-pages
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   if: always()  # Optionally commit and push changes to track deployments
 
