@@ -31,8 +31,9 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: actions/checkout@v2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN}}
         branch: gh-pages
+        force: true
         publish_dir: ./build
 
 
