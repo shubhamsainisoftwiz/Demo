@@ -30,8 +30,10 @@ jobs:
     steps:
     
     - name: Deploy to GitHub Pages
-      run: npm run deploy
       uses: actions/checkout@v2
       with:
         github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
         publish_dir: ./build
+      
+    - name: Deploy to gh-pages
+      run: npm run deploy
