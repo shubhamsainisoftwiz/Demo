@@ -37,7 +37,7 @@ jobs:
       - name: Deploy to GitHub Pages (using latest stable action)
         uses: peaceiris/actions-gh-pages@v3  # Alternative with potential advantages
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use dedicated token with repo permissions
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}  # Use dedicated token with repo permissions
           PUBLISH_DIR: ./build  # Provide the directory containing built files
 
       # Optional commit and push to gh-pages (consider using the alternative action's built-in functionality)
@@ -49,6 +49,6 @@ jobs:
           git commit -m "Deploy from workflow run #${{ github.run_id }}"
           git push origin gh-pages
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
         if: always()  # Optionally commit and push changes to track deployments
 
