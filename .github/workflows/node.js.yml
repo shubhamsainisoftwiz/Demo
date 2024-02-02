@@ -29,10 +29,10 @@ jobs:
 
     steps:
     - name: Deploy to GitHub Pages
-      run: npm run deploy
       uses: actions/checkout@v2
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run deploy
         branch: gh-pages
         publish_dir: ./build
 
