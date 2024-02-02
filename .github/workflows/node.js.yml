@@ -1,35 +1,85 @@
 name: Demo
-
 on:
   push:
-    branches:
-      - main
-
+    branches: [ main ]
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    - name: Generate static VuePress files
+      uses: actions/setup-node@v2
       with:
-        node-version: '20.9.0'
+        node-version: '16'
+    - run: npm ci
+    - run: npm run build
 
-    - name: Install Dependencies
-      run: npm install
+    - name: Init new repo in dist folder and commit generated files
+      run: |
+        cd docs/.vuepress/dist
+        git init
+        git add -A
+        git config --local user.email "shubham.saini@softwizinfotech.com"
+        git config --local user.name "shubhamsoftwiz"
+        git commit -m 'deploy'
 
-    - name: Build React App
-      run: npm run build
-
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Deploy to GitHub Pages
-      uses: actions/checkout@v2
+    - name: Force push to destination branch
+      uses: ad-m/github-push-action@v0.5.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
+        branch: gh-pages
+        force: true
+        directory: ./docs/.vuepress/dist
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# name: Demo
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout Repository
+#       uses: actions/checkout@v2
+
+#     - name: Setup Node.js
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: '20.9.0'
+
+#     - name: Install Dependencies
+#       run: npm install
+
+#     - name: Build React App
+#       run: npm run build
+
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Deploy to GitHub Pages
+#       uses: actions/checkout@v2
+#       with:
+#         github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+#         publish_dir: ./build
