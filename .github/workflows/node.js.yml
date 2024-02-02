@@ -1,41 +1,5 @@
 name: Demo
 
-# on:
-#   push:
-#     branches:
-#       - main
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#     - name: Checkout Repository
-#       uses: actions/checkout@v2
-
-#     - name: Setup Node.js
-#       uses: actions/setup-node@v4
-#       with:
-#         node-version: '20.9.0'
-
-#     - name: Install Dependencies
-#       run: npm install
-
-#     - name: Build React App
-#       run: npm run build
-
-#   deploy:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#     - name: Deploy to GitHub Pages
-#       uses: actions/checkout@v2
-#       with:
-#         github_token: ${{ secrets.GITHUB_TOKEN }}
-#         publish_dir: ./build
-
-
-
 on:
   push:
     branches:
@@ -52,7 +16,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '14'
+        node-version: '20.9.0'
 
     - name: Install Dependencies
       run: npm install
@@ -65,7 +29,7 @@ jobs:
 
     steps:
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: actions/checkout@v2
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./build
