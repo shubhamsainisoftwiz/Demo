@@ -34,13 +34,13 @@ jobs:
         with:
           ref: gh-pages  # Checkout the gh-pages branch explicitly
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.3.3
+      - name: Deploy to GitHub Pages (using latest stable action)
+        uses: peaceiris/actions-gh-pages@v3  # Alternative with potential advantages
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use dedicated token with repo permissions
-          BRANCH: gh-pages  # Specify the target branch
-          FOLDER: ./build  # Provide the directory containing built files
+          PUBLISH_DIR: ./build  # Provide the directory containing built files
 
+      # Optional commit and push to gh-pages (consider using the alternative action's built-in functionality)
       - name: Push changes to gh-pages (optional)
         run: |
           git config --global user.name 'GitHub Actions Bot'
