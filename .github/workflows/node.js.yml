@@ -28,7 +28,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
     - name: Deploy to GitHub Pages
+      run: npm run deploy
       uses: actions/checkout@v2
       with:
         github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
