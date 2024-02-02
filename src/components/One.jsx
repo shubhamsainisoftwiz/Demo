@@ -14,14 +14,11 @@ const One = () => {
   return (
     <div>
 
-      <p>Please Click on "set local" first. then you are able to reach on page two</p>
+      <p>Please Click on "set local" first. then you are able to reach on page two.</p>
         <button onClick={setHandler} >set local</button>
         <button onClick={clickHandler} >Two</button>
 
-        
 
-
-       
     </div>
   )
 }
