@@ -26,4 +26,3 @@ const One = () => {
 export default One
 
 
-// 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
