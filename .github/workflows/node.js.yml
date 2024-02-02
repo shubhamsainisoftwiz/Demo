@@ -3,8 +3,7 @@ name: Demo
 on:
   push:
     branches:
-      # - main
-      - gh-pages
+      - main
 
 jobs:
   build:
@@ -29,11 +28,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy React App
-      run: npm run deploy
-
-    # - name: Deploy to GitHub Pages
-    #   uses: actions/checkout@v2
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: ./build
+    - name: Deploy to GitHub Pages
+      uses: actions/checkout@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
